@@ -9,7 +9,6 @@
     <div class="container">
         <div class="col-lg-12 col-sm-12">
             <section class="content-inner margin-top-no">
-
                 <div class="card">
                     <div class="card-main">
                         <div class="card-inner">
@@ -23,13 +22,31 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-main">
                         <div class="card-inner">
                             <div class="form-group form-group-label">
                                 <label class="floating-label" for="quick_create"> 输入 email 快速创建新用户 </label>
                                 <input class="form-control maxwidth-edit" id="quick_create" type="text">
+                            </div>
+                        </div>
+                        <div class="card-inner">
+                            <div class="form-group form-group-label">
+                                <label for="new_user_add_shop">
+                                    <label class="floating-label" for="new_user_add_shop"> 是否添加套餐 </label>
+                                    <select id="new_user_add_shop" class="form-control maxwidth-edit">
+                                        <option value="0">不添加</option>
+                                    {foreach $shops as $shop}
+                                        <option value="{$shop->id}">{$shop->name}</option>
+                                    {/foreach}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-inner">
+                            <div class="form-group form-group-label">
+                                <label class="floating-label" for="new_user_money"> 用户余额「-1为按默认设置，其他为指定值」 </label>
+                                <input class="form-control maxwidth-edit" id="new_user_money" type="text" value="-1">
                             </div>
                         </div>
                         <div class="card-action">
@@ -40,11 +57,9 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="table-responsive">
                     {include file='table/table.tpl'}
                 </div>
-
                 <div aria-hidden="true" class="modal modal-va-middle fade" id="delete_modal" role="dialog"
                      tabindex="-1">
                     <div class="modal-dialog modal-xs">
@@ -94,31 +109,22 @@
                     </div>
                 </div>
                 {include file='dialog.tpl'}
-
-
         </div>
-
-
     </div>
 </main>
-
 
 {include file='admin/footer.tpl'}
 
 <script>
-
     function delete_modal_show(id) {
         deleteid = id;
         $("#delete_modal").modal();
     }
-
     function changetouser_modal_show(id) {
         changetouserid = id;
         $("#changetouser_modal").modal();
     }
-
     {include file='table/js_1.tpl'}
-
     window.addEventListener('load', () => {
         table_1 = $('#table_1').DataTable({
             order: [[1, 'asc']],
@@ -131,6 +137,7 @@
             columns: [
                 {literal}
                 {"data": "op", "orderable": false},
+                {"data": "querys"},
                 {"data": "id"},
                 {"data": "user_name"},
                 {"data": "remark"},
@@ -170,12 +177,9 @@
                     className: 'mdl-data-table__cell--non-numeric'
                 }
             ],
-
             {include file='table/lang_chinese.tpl'}
         });
-
         var has_init = JSON.parse(localStorage.getItem(`${ldelim}window.location.href{rdelim}-hasinit`));
-
         if (has_init !== true) {
             localStorage.setItem(`${ldelim}window.location.href{rdelim}-hasinit`, true);
         } else {
@@ -188,11 +192,9 @@
             }
             {/foreach}
         }
-
         {foreach $table_config['total_column'] as $key => $value}
         modify_table_visible('checkbox_{$key}', '{$key}');
         {/foreach}
-
         function delete_id() {
             $.ajax({
                 type: "DELETE",
@@ -217,15 +219,10 @@
                 }
             });
         }
-
-
         $$.getElementById('delete_input').addEventListener('click', delete_id);
-
         // $$.getElementById('search_button').addEventListener('click', () => {
         //     if ($$.getElementById('search') !== '') search();
         // });
-
-
         function changetouser_id() {
             $.ajax({
                 type: "POST",
@@ -252,16 +249,16 @@
                 }
             });
         }
-
         $$.getElementById('changetouser_input').addEventListener('click', changetouser_id);
-
         function quickCreate() {
             $.ajax({
                 type: 'POST',
                 url: '/admin/user/create',
                 dataType: 'json',
                 data: {
-                    userEmail: $$getValue('quick_create')
+                    userEmail: $$getValue('quick_create'),
+                    userMoney: $$getValue('new_user_money'),
+                    userShop: $$getValue('new_user_add_shop')
                 },
                 success: data => {
                     $("#result").modal();
@@ -274,9 +271,6 @@
                 }
             })
         }
-
         $$.getElementById('quick_create_confirm').addEventListener('click', quickCreate)
     })
-
-
 </script>

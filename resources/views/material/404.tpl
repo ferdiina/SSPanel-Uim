@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="zh-cn">
 <head>
-    <title>页面无法找到哦 - {$config["appName"]} </title>
+    <title>页面无法找到哦 - {$config['appName']} </title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta charset="utf-8"/>
@@ -9,14 +9,14 @@
     <link rel="bookmark" href="/favicon.ico" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="shortcut icon" type="image/ico" href="images/ssr.ico">
-    <link rel="stylesheet" href="/assets/css/main.css"/>
-
+    <link rel="stylesheet" href="/assets/css/main.min.css"/>
     <noscript>
-        <link rel="stylesheet" href="/assets/css/noscript.css"/>
+        <link rel="stylesheet" href="/assets/css/noscript.min.css"/>
     </noscript>
 </head>
 
 <body>
+
 <div id="wrapper">
     <header id="header">
         <div class="logo">
@@ -34,13 +34,14 @@
             </ul>
         </nav>
     </header>
-    <footer id="footer"><p class="copyright">&copy;{date("Y")} {$config["appName"]}</p></footer>
+    <footer id="footer"><p class="copyright">&copy;{date("Y")} {$config['appName']}</p></footer>
 </div>
 <div id="bg"></div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@1.11.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1"></script>
 <script src="https://cdn.jsdelivr.net/gh/ajlkn/skel@3.0.1/dist/skel.min.js"></script>
-<script src="/assets/js/util.js"></script>
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/util.min.js"></script>
+<script src="/assets/js/main.min.js"></script>
+
 </body>
 
 </html>

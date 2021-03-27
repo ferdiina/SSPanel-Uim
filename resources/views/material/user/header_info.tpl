@@ -6,16 +6,13 @@
     <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
     <meta name="theme-color" content="#4caf50">
     <meta http-equiv="X-Frame-Options" content="sameorigin">
-    <title>{$config["appName"]}</title>
-
+    <title>{$config['appName']}</title>
     <!-- css -->
     <link href="/theme/material/css/base.min.css" rel="stylesheet">
     <link href="/theme/material/css/project.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-
     <!-- jquery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1"></script>
-
     <!-- favicon -->
     <!-- ... -->
     <style>

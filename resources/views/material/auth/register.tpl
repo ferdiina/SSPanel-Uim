@@ -28,7 +28,7 @@
                         <div class="auth-row">
                             <div class="form-group-label auth-row">
                                 <label class="floating-label" for="email">邮箱(唯一凭证请认真对待)</label>
-                                <input class="form-control maxwidth-auth" id="email" type="text" maxlength="32">
+                                <input class="form-control maxwidth-auth" id="email" type="email" maxlength="32" inputmode="email" autocomplete="username">
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="auth-row">
                             <div class="form-group-label auth-row">
                                 <label class="floating-label" for="passwd">密码</label>
-                                <input class="form-control maxwidth-auth" id="passwd" type="password">
+                                <input class="form-control maxwidth-auth" id="passwd" type="password" autocomplete="new-password">
                                 <p id="passwd-strong" style="text-align: left; margin: 3px; font-size: 80%"></p>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                         <div class="auth-row">
                             <div class="form-group form-group-label">
                                 <label class="floating-label" for="repasswd">重复密码</label>
-                                <input class="form-control maxwidth-auth" id="repasswd" type="password">
+                                <input class="form-control maxwidth-auth" id="repasswd" type="password" autocomplete="new-password">
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                                 <div class="form-group form-group-label">
                                     <label class="floating-label" for="email_code">邮箱验证码</label>
                                     <input class="form-control maxwidth-auth" id="email_code" type="text"
-                                           onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">
+                                           onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" autocomplete="one-time-code">
                                 </div>
                             </div>
                             <div class="rowtocol">
@@ -133,7 +133,7 @@
                     </div>
                 {else}
                     <div class="form-group">
-                        <p>{$config["appName"]} 已停止新用户注册，请联系网站管理员</p>
+                        <p>{$config['appName']} 已停止新用户注册，请联系网站管理员</p>
                     </div>
                 {/if}
                 <div class="auth-bottom auth-row auth-reg">
@@ -141,16 +141,10 @@
 
                         <p>注册即代表同意<a href="/tos">服务条款</a>，以及保证所录入信息的真实性，如有不实信息会导致账号被删除。</p>
 
-                        <!-- <span>Telegram</span><button class="btn" id="calltgauth"><i class="icon icon-lg">near_me</i></button><span>快捷登录</span> -->
                     </div>
                 </div>
             </div>
         </section>
-        <div class="card auth-tg">
-            <div class="card-main">
-
-            </div>
-        </div>
     </div>
 </div>
 
@@ -287,7 +281,7 @@ document.getElementById('passwd').addEventListener('input', checkStrong);
                         if (data.ret == 1) {
                             $("#result").modal();
                             $$.getElementById('msg').innerHTML = data.msg;
-                            window.setTimeout("location.href='/auth/login'", {$config['jump_delay']});
+                            window.setTimeout("location.href='/user'", {$config['jump_delay']});
                         } else {
                             $("#result").modal();
                             $$.getElementById('msg').innerHTML = data.msg;
@@ -370,7 +364,6 @@ document.getElementById('passwd').addEventListener('input', checkStrong);
                         1000)
             }
         }
-
 
         $(document).ready(function () {
             $("#email_verify").click(function () {

@@ -9,7 +9,6 @@
     <div class="container">
         <div class="col-lg-12 col-md-12">
             <section class="content-inner margin-top-no">
-
                 <div class="card">
                     <div class="card-main">
                         <div class="card-inner">
@@ -18,13 +17,34 @@
                         </div>
                     </div>
                 </div>
-
+                {if $config['enable_auto_detect_ban']===true}
+                <div class="card">
+                    <div class="card-main">
+                        <div class="card-inner">
+                        {if $config['auto_detect_ban_type']==1}
+                            <p>请注意，每当您触发审计规则达 <strong>{$config['auto_detect_ban_number']}</strong> 次，将会被停止使用服务 <strong>{$config['auto_detect_ban_time']}</strong> 分钟</p>
+                        {else}
+                            <h4>请注意，审计将以以下规则执行：</h4>
+                            <dl class="dl-horizontal">
+                            {foreach $config['auto_detect_ban'] as $key => $value}
+                                {if $value['type']=='kill'}
+                                <dt><i class="material-icons icon-sm">info_outline</i> 当您触碰审计规则达 <strong>{$key}</strong> 次，将会被直接 <strong>删除账号</strong></dt>
+                                {else}
+                                <dt><i class="material-icons icon-sm">info_outline</i> 当您触碰审计规则达 <strong>{$key}</strong> 次，将会被封禁 <strong>{$value['time']}</strong> 分钟</dt>
+                                {/if}
+                            {/foreach}
+                            </dl>
+                        {/if}
+                        </div>
+                    </div>
+                </div>
+                {/if}
                 <div class="card">
                     <div class="card-main">
                         <div class="card-inner">
                             <div class="card-table">
                                 <div class="table-responsive table-user">
-                                    {$rules->render()}
+                                    {$render}
                                     <table class="table">
                                         <tr>
                                             <th>ID</th>
@@ -48,17 +68,14 @@
                                             </tr>
                                         {/foreach}
                                     </table>
-                                    {$rules->render()}
+                                    {$render}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
         </div>
-
     </div>
 </main>
-
 
 {include file='user/footer.tpl'}

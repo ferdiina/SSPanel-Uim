@@ -24,7 +24,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div aria-hidden="true" class="modal modal-va-middle fade" id="changetouser_modal" role="dialog"
                      tabindex="-1">
                     <div class="modal-dialog modal-xs">
@@ -45,7 +44,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-main">
                         <div class="card-inner">
@@ -63,8 +61,7 @@
                         </div>
                     </div>
                 </div>
-
-                {$ticketset->render()}
+                {$render}
                 {foreach $ticketset as $ticket}
                     <div class="card">
                         <aside class="card-side pull-left" style="padding: 16px; text-align: center">
@@ -80,13 +77,9 @@
                         </div>
                     </div>
                 {/foreach}
-                {$ticketset->render()}
-
-
+                {$render}
                 {include file='dialog.tpl'}
-
         </div>
-
     </div>
 </main>
 
@@ -97,7 +90,6 @@
     function changetouser_modal_show() {
         $("#changetouser_modal").modal();
     }
-
     window.addEventListener('load', () => {
         function submit() {
             $("#result").modal();
@@ -128,17 +120,14 @@
                 }
             });
         }
-
         $$.getElementById('submit').addEventListener('click', () => {
             status = 1;
             submit();
         });
-
         $$.getElementById('close').addEventListener('click', () => {
             status = 0;
             submit();
         });
-
         $$.getElementById('close_directly').addEventListener('click', () => {
             status = 0;
             $("#result").modal();
@@ -169,7 +158,6 @@
                 }
             });
         });
-
         function changetouser_id() {
             $.ajax({
                 type: "POST",
@@ -198,13 +186,10 @@
                 }
             });
         }
-
         $$.getElementById('changetouser_input').addEventListener('click', () => {
             changetouser_id();
         });
-
     });
-
     (() => {
         editor = editormd("editormd", {
             path: "https://cdn.jsdelivr.net/npm/editor.md@1.5.0/lib/", // Autoload modules mode, codemirror, marked... dependents libs path
@@ -221,5 +206,4 @@
         });
         */
     })();
-
 </script>
